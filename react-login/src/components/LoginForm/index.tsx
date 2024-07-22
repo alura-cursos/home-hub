@@ -1,6 +1,6 @@
 import { Box, Button, TextField } from '@mui/material';
 
-import { loginFunction } from '../../../../utils/src/home-hub-utils';
+import { loginFunction } from '@home-hub/react-utils';
 import { useForm } from 'react-hook-form';
 
 type FormValues = {
