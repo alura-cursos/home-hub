@@ -7,9 +7,9 @@ export type AuthInfo = {
 	lastName?: string;
 };
 
-export const loginFunction = (email: AuthInfo['email']) => {
+export function loginFunction(email: AuthInfo['email']) {
 	const authId = email.replace('@', '').replace('.', '').codePointAt(0);
 	const cookies = new Cookies(null, { path: '/' });
-	cookies.set('myCat', { email: email, authId: authId });
+	cookies.set('auth', { email: email, authId: authId });
 	location.replace(`/dashboard/${authId}/`);
-};
+}
