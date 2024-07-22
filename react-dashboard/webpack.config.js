@@ -1,15 +1,16 @@
-const { merge } = require("webpack-merge");
-const singleSpaDefaults = require("webpack-config-single-spa-react-ts");
+const { merge } = require('webpack-merge');
+const singleSpaDefaults = require('webpack-config-single-spa-react-ts');
 
 module.exports = (webpackConfigEnv, argv) => {
-  const defaultConfig = singleSpaDefaults({
-    orgName: "home-hub",
-    projectName: "react-dashboard",
-    webpackConfigEnv,
-    argv,
-  });
+	const defaultConfig = singleSpaDefaults({
+		orgName: 'home-hub',
+		projectName: 'react-dashboard',
+		webpackConfigEnv,
+		argv,
+	});
 
-  return merge(defaultConfig, {
-    // modify the webpack config however you'd like to by adding to this object
-  });
+	return merge(defaultConfig, {
+		externals: ['@home-hub/react-utils'],
+		// modify the webpack config however you'd like to by adding to this object
+	});
 };
