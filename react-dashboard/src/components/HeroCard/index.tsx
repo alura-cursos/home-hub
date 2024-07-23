@@ -3,7 +3,7 @@ import { Box, Typography } from '@mui/material';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import VisaoGeral from '../../assets/visao-geral.png';
-import { checkIsAuthenticated } from '../../../../utils/src/home-hub-utils';
+import { checkIsAuthenticated } from '@home-hub/react-utils';
 
 const HeroCard = () => {
 	const { authInfo } = checkIsAuthenticated();

@@ -1,4 +1,4 @@
-import { AuthInfo, checkIsAuthenticated } from '../../utils/src/home-hub-utils';
+import { AuthInfo, checkIsAuthenticated } from '@home-hub/react-utils';
 import { Box, Grid } from '@mui/material';
 import { useEffect, useState } from 'react';
 
@@ -8,7 +8,7 @@ import UsersCard from './components/UsersCard';
 import WaterCard from './components/WaterCard';
 
 export default function Root() {
-	const [authInfo, setAuthInfo] = useState<AuthInfo | undefined>();
+	const [authInfo, setAuthInfo] = useState<typeof AuthInfo | undefined>();
 
 	useEffect(() => {
 		const { isAuthenticated, authInfo: authObj } = checkIsAuthenticated();

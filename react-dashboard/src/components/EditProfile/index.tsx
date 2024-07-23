@@ -1,9 +1,9 @@
-import { AuthInfo, checkIsAuthenticated, editAuthInfo } from '../../../../utils/src/home-hub-utils';
+import { AuthInfo, checkIsAuthenticated, editAuthInfo } from '@home-hub/react-utils';
 import { Box, Button, TextField } from '@mui/material';
 
 import { useForm } from 'react-hook-form';
 
-type FormValues = Omit<AuthInfo, 'authId'>;
+type FormValues = Omit<typeof AuthInfo, 'authId'>;
 
 const EditProfile = () => {
 	const { authInfo } = checkIsAuthenticated();

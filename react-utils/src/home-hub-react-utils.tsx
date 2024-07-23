@@ -23,15 +23,13 @@ export function logoutFunction() {
 export function checkIsAuthenticated() {
 	const cookies = new Cookies(null, { path: '/' });
 	const auth = cookies.get('auth');
-	console.log('COOKIE AUTH: ', auth);
 	if (!auth) {
 		return { authInfo: undefined, isAuthenticated: false };
 	}
-	const authObj: AuthInfo = JSON.parse(auth);
-	if (!location.pathname.includes(authObj.authId.toString())) {
+	if (!location.pathname.includes(auth.authId.toString())) {
 		return { authInfo: undefined, isAuthenticated: false };
 	}
-	return { authInfo: authObj, isAuthenticated: true };
+	return { authInfo: auth, isAuthenticated: true };
 }
 
 export function editAuthInfo(data: AuthInfo) {

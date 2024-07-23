@@ -14,7 +14,7 @@ import {
 	MenuItem,
 	Toolbar,
 } from '@mui/material';
-import { AuthInfo, checkIsAuthenticated, logoutFunction } from '../../utils/src/home-hub-utils';
+import { AuthInfo, checkIsAuthenticated, logoutFunction } from '@home-hub/react-utils';
 import { useEffect, useState } from 'react';
 
 import { AccountCircle } from '@mui/icons-material';
@@ -29,7 +29,7 @@ import WifiIcon from '@mui/icons-material/Wifi';
 
 export default function App() {
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-	const [authInfo, setAuthInfo] = useState<AuthInfo | undefined>();
+	const [authInfo, setAuthInfo] = useState<typeof AuthInfo | undefined>();
 
 	useEffect(() => {
 		const { isAuthenticated, authInfo: authObj } = checkIsAuthenticated();
