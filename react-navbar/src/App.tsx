@@ -58,7 +58,10 @@ export default function App() {
 						<ListItemText primary={'Visão geral'} />
 					</ListItemButton>
 				</ListItem>
-				<ListItem disablePadding>
+				<ListItem
+					disablePadding
+					onClick={() => location.replace(`/dashboard/${authInfo.authId}/devices`)}
+				>
 					<ListItemButton>
 						<ListItemIcon>
 							<WifiIcon />

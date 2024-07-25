@@ -1,26 +1,18 @@
 import * as React from 'react';
 
-import { Card, CardContent } from '@mui/material';
+import { Card, CardContent, Stack, Switch, Typography } from '@mui/material';
 
 import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
 
 const marks = [
 	{
-		value: 0,
-		label: '0°C',
+		value: 16,
+		label: '16°C',
 	},
 	{
-		value: 20,
-		label: '20°C',
-	},
-	{
-		value: 37,
-		label: '37°C',
-	},
-	{
-		value: 100,
-		label: '100°C',
+		value: 27,
+		label: '27°C',
 	},
 ];
 
@@ -31,15 +23,23 @@ function valuetext(value: number) {
 const AcCard = () => {
 	return (
 		<Card sx={{ background: '#F5F5F5' }}>
-			<CardContent>
-				<Box sx={{ width: 300 }}>
+			<CardContent sx={{ marginX: 5, marginY: 2 }}>
+				<Box display={'flex'} alignItems={'center'} flexDirection={'column'}>
+					<Typography color={'#E65100'}>Ar-Condicionado</Typography>
+				</Box>
+				<Box>
+					<Stack direction='row' spacing={1} alignItems='center'>
+						<Typography>Off</Typography>
+						<Switch defaultChecked inputProps={{ 'aria-label': 'ant design' }} />
+						<Typography>On</Typography>
+					</Stack>
 					<Slider
-						aria-label='Custom marks'
 						defaultValue={20}
 						getAriaValueText={valuetext}
-						step={10}
 						valueLabelDisplay='auto'
 						marks={marks}
+						min={16}
+						max={27}
 					/>
 				</Box>
 			</CardContent>
