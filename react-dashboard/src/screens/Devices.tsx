@@ -1,5 +1,6 @@
 import { Box, Grid } from '@mui/material';
 
+import AcCard from '../components/AcCard';
 import HeroCard from '../components/HeroCard';
 
 const Devices = () => {
@@ -15,7 +16,13 @@ const Devices = () => {
 		>
 			<Grid container spacing={2}>
 				<Grid item xs={12}>
-					<HeroCard title='Hello' subtitle='World' />
+					<HeroCard
+						title='Dispositos'
+						subtitle='Controle seus dispositivos de perto ou de longe!'
+					/>
+				</Grid>
+				<Grid item xs={4}>
+					<AcCard />
 				</Grid>
 			</Grid>
 		</Box>
