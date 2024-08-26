@@ -1,3 +1,3 @@
 export default function ParcelComponent() {
-	return <section>React Parcel Component</section>;
+	return <section>Hello World!</section>;
 }
