@@ -82,16 +82,18 @@ export default {
 			wrapWith: 'div',
 			mountParcel: mountRootParcel,
 			wrapStyle: {
-				outline: '1px solid red',
-				width: '20px',
-				height: '20px',
-				backgroundColor: 'red',
+				outline: '1px solid blue',
+				width: '40px',
+				height: '40px',
+				backgroundColor: 'blue',
 			},
 		};
 	},
 	methods: {
 		getParcelProps() {
-			return;
+			return {
+				message: 'Hello World',
+			};
 		},
 		parcelMounted() {
 			console.log('parcel mounted');
