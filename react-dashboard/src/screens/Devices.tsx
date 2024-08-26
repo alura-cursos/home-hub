@@ -1,6 +1,7 @@
 import { Box, Grid } from '@mui/material';
 
 import AcCard from '../components/AcCard';
+import DoorCard from '../components/DoorCard';
 import HeroCard from '../components/HeroCard';
 
 const Devices = () => {
@@ -23,6 +24,9 @@ const Devices = () => {
 				</Grid>
 				<Grid item xs={4}>
 					<AcCard />
+				</Grid>
+				<Grid item xs={4}>
+					<DoorCard />
 				</Grid>
 			</Grid>
 		</Box>

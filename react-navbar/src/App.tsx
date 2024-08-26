@@ -69,22 +69,6 @@ export default function App() {
 						<ListItemText primary={'Dispositivos'} />
 					</ListItemButton>
 				</ListItem>
-				<ListItem disablePadding>
-					<ListItemButton>
-						<ListItemIcon>
-							<LockIcon />
-						</ListItemIcon>
-						<ListItemText primary={'Segurança'} />
-					</ListItemButton>
-				</ListItem>
-				<ListItem disablePadding>
-					<ListItemButton>
-						<ListItemIcon>
-							<SettingsIcon />
-						</ListItemIcon>
-						<ListItemText primary={'Configurações'} />
-					</ListItemButton>
-				</ListItem>
 			</List>
 		</Box>
 	);
@@ -116,14 +100,6 @@ export default function App() {
 				{!!authInfo?.firstName ? `${authInfo?.firstName} ${authInfo?.lastName}` : authInfo?.email}
 			</MenuItem>
 			<Divider />
-			<ListItem disablePadding onClick={handleMenuClose}>
-				<ListItemButton>
-					<ListItemIcon>
-						<SettingsIcon />
-					</ListItemIcon>
-					<ListItemText primary={'Configurações'} />
-				</ListItemButton>
-			</ListItem>
 			<ListItem
 				disablePadding
 				onClick={() => location.replace(`/dashboard/${authInfo.authId}/edit-profile`)}
@@ -169,11 +145,6 @@ export default function App() {
 									<AccountCircle />
 								</IconButton>
 							</MenuItem>
-							<IconButton size='large' color='inherit'>
-								<Badge color='error'>
-									<NotificationsIcon />
-								</Badge>
-							</IconButton>
 						</Box>
 					</Toolbar>
 				</AppBar>
