@@ -82,8 +82,8 @@ export default {
 			wrapWith: 'div',
 			mountParcel: mountRootParcel,
 			wrapStyle: {
-				outline: '1px solid blue',
-				width: '40px',
+				outline: '2px solid black',
+				width: '200px',
 				height: '40px',
 				backgroundColor: 'blue',
 			},
