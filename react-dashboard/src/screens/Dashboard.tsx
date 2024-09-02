@@ -1,6 +1,7 @@
 import { Box, Grid } from '@mui/material';
 
 import HeroCard from '../components/HeroCard';
+import RemindersCard from '../components/RemindersCard';
 import UsersCard from '../components/UsersCard';
 import WaterCard from '../components/WaterCard';
 import { checkIsAuthenticated } from '@home-hub/react-utils';
@@ -33,6 +34,9 @@ const Dashboard: React.FC = () => {
 				</Grid>
 				<Grid item xs={4}>
 					<WaterCard />
+				</Grid>
+				<Grid item xs={4}>
+					<RemindersCard />
 				</Grid>
 			</Grid>
 		</Box>
