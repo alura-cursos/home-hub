@@ -36,10 +36,8 @@ export function editAuthInfo(data: AuthInfo) {
 	const cookies = new Cookies(null, { path: '/' });
 	const auth = cookies.get('auth');
 	if (!location.pathname.includes(auth.authId.toString())) {
-		alert('Você não tem permissão para editar este usuário');
 		return logoutFunction();
 	}
 	cookies.set('auth', data);
-	alert('Usuário editado com sucesso');
 	return;
 }

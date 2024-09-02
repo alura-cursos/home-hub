@@ -1,5 +1,6 @@
 import { AuthInfo, checkIsAuthenticated, editAuthInfo } from '@home-hub/react-utils';
 import { Box, Button, TextField } from '@mui/material';
+import Snackbar, { SnackbarCloseReason } from '@mui/material/Snackbar';
 
 import Parcel from 'single-spa-react/parcel';
 import { useForm } from 'react-hook-form';
@@ -17,6 +18,16 @@ const EditProfile = () => {
 	} = useForm<FormValues>({ defaultValues: authInfo });
 
 	const onSubmit = (data: FormValues) => editAuthInfo({ ...data, authId: authInfo.authId });
+
+	const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
+
+	const handleClose = (event: React.SyntheticEvent | Event, reason?: SnackbarCloseReason) => {
+		if (reason === 'clickaway') {
+			return;
+		}
+
+		setIsSnackbarOpen(false);
+	};
 
 	return (
 		<Box sx={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
@@ -69,7 +80,16 @@ const EditProfile = () => {
 					rightBtnFn={() => {
 						setIsDialogOpen(false);
 						handleSubmit((data) => onSubmit(data))();
+						setTimeout(() => setIsSnackbarOpen(true), 500);
 					}}
+				/>
+			)}
+			{isSnackbarOpen && (
+				<Snackbar
+					open={isSnackbarOpen}
+					autoHideDuration={5000}
+					onClose={handleClose}
+					message='Perfil editado com sucesso!'
 				/>
 			)}
 		</Box>
