@@ -19,6 +19,7 @@ import { useEffect, useState } from 'react';
 import { AccountCircle } from '@mui/icons-material';
 import HomeHubLogo from './assets/home-hub.png';
 import LogoutIcon from '@mui/icons-material/Logout';
+import Parcel from 'single-spa-react/parcel';
 import PersonIcon from '@mui/icons-material/Person';
 import SpaceDashboardIcon from '@mui/icons-material/SpaceDashboard';
 import WifiIcon from '@mui/icons-material/Wifi';
@@ -38,10 +39,13 @@ export default function App() {
 	const isMenuOpen = Boolean(anchorEl);
 
 	const [open, setOpen] = useState(false);
+	const [isDialogOpen, setIsDialogOpen] = useState(false);
 
 	const toggleDrawer = (newOpen: boolean) => () => {
 		setOpen(newOpen);
 	};
+
+	console.log(isDialogOpen);
 
 	const DrawerList = (
 		<Box sx={{ width: 250 }} role='presentation' onClick={toggleDrawer(false)}>
@@ -108,7 +112,7 @@ export default function App() {
 				</ListItemButton>
 			</ListItem>
 			<Divider />
-			<ListItem disablePadding onClick={logoutFunction}>
+			<ListItem disablePadding onClick={() => setIsDialogOpen(true)}>
 				<ListItemButton>
 					<ListItemIcon>
 						<LogoutIcon />
@@ -149,6 +153,19 @@ export default function App() {
 				</Drawer>
 				{renderMenu}
 			</Box>
+			<Parcel
+				config={() => System.import('@home-hub/react-parcel') as any}
+				isOpen={isDialogOpen}
+				title='Home Hub'
+				description='Deseja efetuar logout?'
+				leftBtnText='Cancelar'
+				rightBtnText='Sair'
+				leftBtnFn={() => setIsDialogOpen(false)}
+				rightBtnFn={() => {
+					logoutFunction();
+					setIsDialogOpen(false);
+				}}
+			/>
 		</div>
 	);
 }

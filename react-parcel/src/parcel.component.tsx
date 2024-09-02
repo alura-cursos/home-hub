@@ -54,7 +54,7 @@ export default function Parcel({
 			open={open}
 			TransitionComponent={Transition}
 			keepMounted
-			onClose={() => setOpen(false)}
+			onClose={_leftBtnFn}
 			aria-describedby='alert-dialog-slide-description'
 		>
 			<DialogTitle>{title}</DialogTitle>
