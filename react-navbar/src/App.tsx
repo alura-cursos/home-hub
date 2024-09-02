@@ -1,6 +1,5 @@
 import {
 	AppBar,
-	Badge,
 	Box,
 	Divider,
 	Drawer,
@@ -19,11 +18,8 @@ import { useEffect, useState } from 'react';
 
 import { AccountCircle } from '@mui/icons-material';
 import HomeHubLogo from './assets/home-hub.png';
-import LockIcon from '@mui/icons-material/Lock';
 import LogoutIcon from '@mui/icons-material/Logout';
-import NotificationsIcon from '@mui/icons-material/Notifications';
 import PersonIcon from '@mui/icons-material/Person';
-import SettingsIcon from '@mui/icons-material/Settings';
 import SpaceDashboardIcon from '@mui/icons-material/SpaceDashboard';
 import WifiIcon from '@mui/icons-material/Wifi';
 
