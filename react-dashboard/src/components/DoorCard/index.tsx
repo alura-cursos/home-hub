@@ -6,6 +6,8 @@ import {
 	InputLabel,
 	MenuItem,
 	Select,
+	Snackbar,
+	SnackbarCloseReason,
 	Typography,
 } from '@mui/material';
 
@@ -14,6 +16,15 @@ import { useState } from 'react';
 
 const DoorCard = () => {
 	const [selectedDoor, setSelectedDoor] = useState({ door: 'entrada', isOpen: false });
+	const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
+
+	const handleClose = (event: React.SyntheticEvent | Event, reason?: SnackbarCloseReason) => {
+		if (reason === 'clickaway') {
+			return;
+		}
+		setIsSnackbarOpen(false);
+	};
+
 	return (
 		<Card sx={{ background: '#F5F5F5' }}>
 			<CardContent sx={{ marginX: 5, marginY: 2 }}>
@@ -41,7 +52,10 @@ const DoorCard = () => {
 						variant='contained'
 						size='large'
 						sx={{ backgroundColor: '#9C27B0', marginTop: '20px', marginX: '32px' }}
-						onClick={() => setSelectedDoor({ ...selectedDoor, isOpen: true })}
+						onClick={() => {
+							setSelectedDoor({ ...selectedDoor, isOpen: true });
+							setIsSnackbarOpen(true);
+						}}
 					>
 						Abrir
 					</Button>
@@ -49,12 +63,23 @@ const DoorCard = () => {
 						variant='contained'
 						size='large'
 						sx={{ backgroundColor: 'red', marginTop: '20px', marginX: '32px' }}
-						onClick={() => setSelectedDoor({ ...selectedDoor, isOpen: false })}
+						onClick={() => {
+							setSelectedDoor({ ...selectedDoor, isOpen: false });
+							setIsSnackbarOpen(true);
+						}}
 					>
 						Trancar
 					</Button>
 				</Box>
 			</CardContent>
+			{isSnackbarOpen && (
+				<Snackbar
+					open={isSnackbarOpen}
+					autoHideDuration={2000}
+					onClose={handleClose}
+					message={`Porta ${selectedDoor.door} ${selectedDoor.isOpen ? 'aberta' : 'trancada'}.`}
+				/>
+			)}
 		</Card>
 	);
 };
