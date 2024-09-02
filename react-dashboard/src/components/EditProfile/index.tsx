@@ -1,11 +1,14 @@
 import { AuthInfo, checkIsAuthenticated, editAuthInfo } from '@home-hub/react-utils';
 import { Box, Button, TextField } from '@mui/material';
 
+import Parcel from 'single-spa-react/parcel';
 import { useForm } from 'react-hook-form';
+import { useState } from 'react';
 
 type FormValues = Omit<typeof AuthInfo, 'authId'>;
 
 const EditProfile = () => {
+	const [isDialogOpen, setIsDialogOpen] = useState(false);
 	const { authInfo } = checkIsAuthenticated();
 	const {
 		register,
@@ -50,10 +53,25 @@ const EditProfile = () => {
 			<Button
 				variant='contained'
 				sx={{ backgroundColor: '#9C27B0', marginTop: '20px', marginX: '32px' }}
-				onClick={handleSubmit(onSubmit)}
+				onClick={() => setIsDialogOpen(true)}
 			>
 				Editar perfil
 			</Button>
+			{isDialogOpen && (
+				<Parcel
+					config={() => System.import('@home-hub/react-parcel') as any}
+					isOpen={isDialogOpen}
+					title='Home Hub'
+					description='Deseja salvar as alterações?'
+					leftBtnText='Cancelar'
+					rightBtnText='Salvar'
+					leftBtnFn={() => setIsDialogOpen(false)}
+					rightBtnFn={() => {
+						setIsDialogOpen(false);
+						handleSubmit((data) => onSubmit(data))();
+					}}
+				/>
+			)}
 		</Box>
 	);
 };

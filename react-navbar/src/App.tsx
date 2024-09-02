@@ -153,19 +153,21 @@ export default function App() {
 				</Drawer>
 				{renderMenu}
 			</Box>
-			<Parcel
-				config={() => System.import('@home-hub/react-parcel') as any}
-				isOpen={isDialogOpen}
-				title='Home Hub'
-				description='Deseja efetuar logout?'
-				leftBtnText='Cancelar'
-				rightBtnText='Sair'
-				leftBtnFn={() => setIsDialogOpen(false)}
-				rightBtnFn={() => {
-					logoutFunction();
-					setIsDialogOpen(false);
-				}}
-			/>
+			{isDialogOpen && (
+				<Parcel
+					config={() => System.import('@home-hub/react-parcel') as any}
+					isOpen={isDialogOpen}
+					title='Home Hub'
+					description='Deseja efetuar logout?'
+					leftBtnText='Cancelar'
+					rightBtnText='Sair'
+					leftBtnFn={() => setIsDialogOpen(false)}
+					rightBtnFn={() => {
+						setIsDialogOpen(false);
+						logoutFunction();
+					}}
+				/>
+			)}
 		</div>
 	);
 }
