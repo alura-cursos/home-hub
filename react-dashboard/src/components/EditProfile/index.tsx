@@ -1,5 +1,5 @@
 import { AuthInfo, checkIsAuthenticated, editAuthInfo } from '@home-hub/react-utils';
-import { Box, Button, TextField } from '@mui/material';
+import { Box, Button, Snackbar, TextField } from '@mui/material';
 
 import Parcel from 'single-spa-react/parcel';
 import { useForm } from 'react-hook-form';
@@ -15,8 +15,13 @@ const EditProfile = () => {
 		formState: { errors },
 	} = useForm<FormValues>({ defaultValues: authInfo });
 	const [isVisible, setIsVisible] = useState<boolean>(false);
+	const [isSnackbarVisible, setIsSnackbarVisible] = useState<boolean>(false);
 
-	const onSubmit = (data: FormValues) => editAuthInfo({ ...data, authId: authInfo.authId });
+	const onSubmit = (data: FormValues) => {
+		setIsVisible(false);
+		editAuthInfo({ ...data, authId: authInfo.authId });
+		setIsSnackbarVisible(true);
+	};
 
 	return (
 		<Box sx={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
@@ -67,6 +72,14 @@ const EditProfile = () => {
 					rightBtnFn={handleSubmit(onSubmit)}
 					rightBtnText='Confirmar'
 					title='HomeHub'
+				/>
+			)}
+			{isSnackbarVisible && (
+				<Snackbar
+					open={isSnackbarVisible}
+					autoHideDuration={2000}
+					onClose={() => setIsSnackbarVisible(false)}
+					message='Usuário editado com sucesso.'
 				/>
 			)}
 		</Box>
