@@ -22,6 +22,7 @@ import HomeHubLogo from './assets/home-hub.png';
 import LockIcon from '@mui/icons-material/Lock';
 import LogoutIcon from '@mui/icons-material/Logout';
 import NotificationsIcon from '@mui/icons-material/Notifications';
+import Parcel from 'single-spa-react/parcel';
 import PersonIcon from '@mui/icons-material/Person';
 import SettingsIcon from '@mui/icons-material/Settings';
 import SpaceDashboardIcon from '@mui/icons-material/SpaceDashboard';
@@ -30,6 +31,7 @@ import WifiIcon from '@mui/icons-material/Wifi';
 export default function App() {
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 	const [authInfo, setAuthInfo] = useState<typeof AuthInfo | undefined>();
+	const [isVisible, setIsVisible] = useState<boolean>(false);
 
 	useEffect(() => {
 		const { isAuthenticated, authInfo: authObj } = checkIsAuthenticated();
@@ -45,6 +47,11 @@ export default function App() {
 
 	const toggleDrawer = (newOpen: boolean) => () => {
 		setOpen(newOpen);
+	};
+
+	const logout = () => {
+		setIsVisible(false);
+		logoutFunction();
 	};
 
 	const DrawerList = (
@@ -112,7 +119,7 @@ export default function App() {
 				</ListItemButton>
 			</ListItem>
 			<Divider />
-			<ListItem disablePadding onClick={logoutFunction}>
+			<ListItem disablePadding onClick={() => setIsVisible(true)}>
 				<ListItemButton>
 					<ListItemIcon>
 						<LogoutIcon />
@@ -153,6 +160,18 @@ export default function App() {
 				</Drawer>
 				{renderMenu}
 			</Box>
+			{isVisible && (
+				<Parcel
+					config={() => System.import('@home-hub/react-parcel') as any}
+					description='Deseja efetuar logout e sair do HomeHub?'
+					isVisible={isVisible}
+					leftBtnFn={() => setIsVisible(false)}
+					leftBtnText='Cancelar'
+					rightBtnFn={logout}
+					rightBtnText='Sair'
+					title='HomeHub'
+				/>
+			)}
 		</div>
 	);
 }
