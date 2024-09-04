@@ -1,7 +1,9 @@
 import { AuthInfo, checkIsAuthenticated, editAuthInfo } from '@home-hub/react-utils';
 import { Box, Button, TextField } from '@mui/material';
 
+import Parcel from 'single-spa-react/parcel';
 import { useForm } from 'react-hook-form';
+import { useState } from 'react';
 
 type FormValues = Omit<typeof AuthInfo, 'authId'>;
 
@@ -12,6 +14,7 @@ const EditProfile = () => {
 		handleSubmit,
 		formState: { errors },
 	} = useForm<FormValues>({ defaultValues: authInfo });
+	const [isVisible, setIsVisible] = useState<boolean>(false);
 
 	const onSubmit = (data: FormValues) => editAuthInfo({ ...data, authId: authInfo.authId });
 
@@ -50,10 +53,22 @@ const EditProfile = () => {
 			<Button
 				variant='contained'
 				sx={{ backgroundColor: '#9C27B0', marginTop: '20px', marginX: '32px' }}
-				onClick={handleSubmit(onSubmit)}
+				onClick={() => setIsVisible(true)}
 			>
 				Editar perfil
 			</Button>
+			{isVisible && (
+				<Parcel
+					config={() => System.import('@home-hub/react-parcel') as any}
+					description='Confirmar as alterações?'
+					isVisible={isVisible}
+					leftBtnFn={() => setIsVisible(false)}
+					leftBtnText='Cancelar'
+					rightBtnFn={handleSubmit(onSubmit)}
+					rightBtnText='Confirmar'
+					title='HomeHub'
+				/>
+			)}
 		</Box>
 	);
 };

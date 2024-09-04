@@ -37,24 +37,12 @@ export default function Parcel({
 	rightBtnText,
 	title,
 }: ParcelProps) {
-	const [open, setOpen] = React.useState(isVisible);
-
-	const _rightBtnFn = () => {
-		rightBtnFn();
-		setOpen(false);
-	};
-
-	const _leftBtnFn = () => {
-		leftBtnFn();
-		setOpen(false);
-	};
-
 	return (
 		<React.Fragment>
 			<Dialog
-				open={open}
+				open={isVisible}
 				TransitionComponent={Transition}
-				onClose={() => setOpen(false)}
+				onClose={leftBtnFn}
 				aria-describedby='alert-dialog-slide-description'
 			>
 				<DialogTitle>{title}</DialogTitle>
@@ -62,8 +50,8 @@ export default function Parcel({
 					<DialogContentText id='alert-dialog-slide-description'>{description}</DialogContentText>
 				</DialogContent>
 				<DialogActions>
-					<Button onClick={_leftBtnFn}>{leftBtnText}</Button>
-					<Button onClick={_rightBtnFn}>{rightBtnText}</Button>
+					<Button onClick={leftBtnFn}>{leftBtnText}</Button>
+					<Button onClick={rightBtnFn}>{rightBtnText}</Button>
 				</DialogActions>
 			</Dialog>
 		</React.Fragment>
