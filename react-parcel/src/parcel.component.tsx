@@ -18,14 +18,34 @@ const Transition = React.forwardRef(function Transition(
 	return <Slide direction='up' ref={ref} {...props} />;
 });
 
-export default function Parcel() {
-	const [open, setOpen] = React.useState(false);
+interface ParcelProps {
+	title: string;
+	description: string;
+	leftBtnText: string;
+	rightBtnText: string;
+	leftBtnFn: () => void;
+	rightBtnFn: () => void;
+	isVisible: boolean;
+}
 
-	const handleClickOpen = () => {
-		setOpen(true);
+export default function Parcel({
+	description,
+	isVisible,
+	leftBtnFn,
+	leftBtnText,
+	rightBtnFn,
+	rightBtnText,
+	title,
+}: ParcelProps) {
+	const [open, setOpen] = React.useState(isVisible);
+
+	const _rightBtnFn = () => {
+		rightBtnFn();
+		setOpen(false);
 	};
 
-	const handleClose = () => {
+	const _leftBtnFn = () => {
+		leftBtnFn();
 		setOpen(false);
 	};
 
@@ -34,8 +54,7 @@ export default function Parcel() {
 			<Dialog
 				open={open}
 				TransitionComponent={Transition}
-				keepMounted
-				onClose={handleClose}
+				onClose={() => setOpen(false)}
 				aria-describedby='alert-dialog-slide-description'
 			>
 				<DialogTitle>{title}</DialogTitle>
@@ -43,8 +62,8 @@ export default function Parcel() {
 					<DialogContentText id='alert-dialog-slide-description'>{description}</DialogContentText>
 				</DialogContent>
 				<DialogActions>
-					<Button onClick={handleClose}>{leftBtnText}</Button>
-					<Button onClick={handleClose}>{rightBtnText}</Button>
+					<Button onClick={_leftBtnFn}>{leftBtnText}</Button>
+					<Button onClick={_rightBtnFn}>{rightBtnText}</Button>
 				</DialogActions>
 			</Dialog>
 		</React.Fragment>
